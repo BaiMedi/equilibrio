@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Interactivo de Bienestar</title>
+    <style>
+        body {
+            font-family: 'Sora', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            color: #22C0DC;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .btn {
+            background-color: #01BD39;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #019c31;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f8ff;
+            border: 1px solid #22C0DC;
+            border-radius: 5px;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #22C0DC;
+        }
+        footer p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        footer a {
+            display: inline-block;
+            color: white;
+            background-color: #01BD39;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Plan Interactivo de Bienestar</h1>
+    <p>Construye tu rutina de bienestar personalizada incluyendo pausas, tiempo personal y actividades relajantes.</p>
+
+    <label for="work-hours">1. Horas de trabajo diarias:</label>
+    <input type="number" id="work-hours" placeholder="Ejemplo: 8" />
+
+    <label for="breaks">2. Pausas planificadas (en minutos):</label>
+    <input type="number" id="breaks" placeholder="Ejemplo: 15" />
+
+    <label for="activities">3. Actividades relajantes preferidas:</label>
+    <textarea id="activities" placeholder="Ejemplo: Meditación, lectura, caminatas..."></textarea>
+
+    <label for="personal-time">4. Tiempo personal (en minutos):</label>
+    <input type="number" id="personal-time" placeholder="Ejemplo: 30" />
+
+    <button class="btn" onclick="generatePlan()">Generar Plan de Bienestar</button>
+
+    <div id="result" class="result" style="display: none;">
+        <h2>Tu Plan de Bienestar:</h2>
+        <p id="plan"></p>
+        <p id="suggestion" style="color: #22C0DC; font-weight: bold;"></p>
+    </div>
+</div>
+
+<footer>
+    <p>Descubre el Secreto de Reinventarse Profesionalmente en Solo 14 Días</p>
+    <a href="https://klicana.work/Ecpzgd">¡SÍ! INSCRIBIRME EN “ASISTENTE VIRTUAL EN 14 DÍAS”</a>
+</footer>
+
+<script>
+    function generatePlan() {
+        const workHours = parseInt(document.getElementById('work-hours').value);
+        const breaks = parseInt(document.getElementById('breaks').value);
+        const activities = document.getElementById('activities').value.split(',');
+        const personalTime = parseInt(document.getElementById('personal-time').value);
+
+        if (isNaN(workHours) || isNaN(breaks) || isNaN(personalTime) || activities.length === 0) {
+            alert("Por favor, completa todos los campos.");
+            return;
+        }
+
+        const totalBreakTime = Math.ceil(workHours / 2) * breaks;
+        const activitySuggestion = activities.map(act => act.trim()).join(', ');
+
+        let message = `Tu rutina incluye:\n\n`;
+        message += `Horas de trabajo: ${workHours}\n`;
+        message += `Tiempo total para pausas: ${totalBreakTime} minutos\n`;
+        message += `Tiempo personal reservado: ${personalTime} minutos\n`;
+        message += `Actividades relajantes: ${activitySuggestion}\n`;
+
+        document.getElementById('plan').textContent = message;
+        document.getElementById('suggestion').textContent = "Sugerencia: Integra actividades cortas como estiramientos en tus pausas para mejorar tu bienestar.";
+        document.getElementById('result').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
